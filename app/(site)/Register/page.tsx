@@ -1,7 +1,10 @@
 'use client'
 
 
+import { register } from "module"
 import { useState } from "react"
+import axios from "axios"
+
 
 
 
@@ -15,6 +18,14 @@ export default function Register() {
     })
 
 
+    const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      axios.post('/api/register', data)
+      .then(() => alert('User has been registered'))
+      .catch(() => alert('An error occured'))
+    }
+
+
     return (
       <>
         
@@ -26,7 +37,7 @@ export default function Register() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={registerUser}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
                   Fullname
